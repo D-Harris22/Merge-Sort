@@ -1,0 +1,111 @@
+import java.util.Random;
+
+// Class
+public class DivideandConquer{
+     // Main method
+   public static void main(String[] args) { 
+
+       // Store array in numbers
+   long s_time = System.currentTimeMillis();
+   Random d = new Random(); 
+       Integer[] University = new Integer[100000];
+       
+       // Generate random numbers with for loop
+       for(int i=0; i<100000; i++)
+       University[i] = d.nextInt(150) + 0;
+       long e_time = System.currentTimeMillis();
+       // time calculation
+       System.out.println("The time to generate 100000 = " 
+               +(e_time-s_time) + " MiliSecond");
+// Find the first index of "58"         
+       s_time = System.currentTimeMillis(); 
+       // For loop
+       for(int i=0; i<100000; i++){
+       if (University[i] == 58)
+       {
+           // Find the position of "58"
+       System.out.println("The Position of 58 before sorting is = " + i);
+       break;
+       }
+        }
+       e_time = System.currentTimeMillis();
+       System.out.println("The time to search for the element 58 = " 
+               +(e_time-s_time) + " MiliSecond");
+       s_time = System.currentTimeMillis();
+       int count = 0;
+       for(int i=0; i<100000; i++)
+       if (University[i] == 58)
+       count++;
+       System.out.println("The number of 58 before sorting = " + count);
+       e_time = System.currentTimeMillis();
+       System.out.println("Run Time count 58 before sorting = " 
+               +(e_time-s_time) + " MiliSecond");
+       s_time = System.currentTimeMillis();
+       
+       // Merge the array
+       mergeSort(University);
+       e_time = System.currentTimeMillis();
+       System.out.println("The time to merge sort = " +(e_time-s_time) 
+               + " MiliSecond");
+       s_time = System.currentTimeMillis();
+       for(int i=0; i<100000; i++)
+       {
+       if (University[i] == 58)
+       {
+       System.out.println("The Position of 58 after the merge sort = " + i);
+       break;
+       }
+        }
+       e_time = System.currentTimeMillis();
+      
+       System.out.println("The time to search first 58 after sorting = " 
+               +(e_time-s_time) + " MiliSecond");
+
+// Count how many "58's" are in the array
+      
+       s_time = System.currentTimeMillis();
+       count = 0;
+       for(int i=0; University[i]<=58; i++)
+       if (University[i] == 58)
+       count++;
+       System.out.println("The number of 58 after sorting = " + count);
+       e_time = System.currentTimeMillis();
+       System.out.println("The time to count 58 is = " 
+               +(e_time-s_time) + " MiliSecond");
+      }
+
+// Merge sort
+
+   public static void mergeSort(Comparable [] University){
+       Comparable[] temp = new Comparable[University.length];
+       mergeSort(University, temp, 0, University.length - 1);
+   }
+   
+   private static void mergeSort(Comparable[] University,Comparable[] 
+           temp, int l, int r){
+       // If statement
+       if( l < r ){
+           int center = (l + r) / 2;
+           mergeSort(University, temp, l, center);
+           mergeSort(University, temp, center + 1, r);
+           merge(University, temp, l, center + 1, r);
+       }
+   }
+private static void merge(Comparable[] University, Comparable[]
+        temp, int l, int r, int rEnd ){
+int lEnd = r - 1;
+int k = l;
+int num = rEnd - l + 1;
+while(l <= lEnd && r <= rEnd)
+if(University[l].compareTo(University[r]) <= 0)
+temp[k++] = University[l++];
+else
+temp[k++] = University[r++];
+while(l <= lEnd)
+temp[k++] = University[l++];
+while(r <= rEnd)
+temp[k++] = University[r++];
+for(int i = 0; i < num; i++, rEnd--)
+University[rEnd] = temp[rEnd];
+ }
+}
